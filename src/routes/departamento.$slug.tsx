@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import type { Department } from "@/lib/site-data";
 import { SiteShell, PageHero } from "@/components/site/SiteShell";
 import { departments } from "@/lib/site-data";
 import researchImg from "@/assets/research-econlab.jpg";
@@ -37,7 +38,7 @@ export const Route = createFileRoute("/departamento/$slug")({
 });
 
 function DepartamentoPage() {
-  const { dept } = Route.useLoaderData();
+  const { dept } = Route.useLoaderData() as { dept: Department };
   return (
     <SiteShell>
       <PageHero eyebrow="Microsite Departamental" title={dept.name} subtitle={dept.tagline} />
