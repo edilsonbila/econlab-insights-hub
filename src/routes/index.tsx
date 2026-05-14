@@ -96,11 +96,26 @@ function HomePage() {
       {/* SOBRE */}
       <section className="py-24 md:py-32">
         <div className="container-econ grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative">
+          <div className="relative animate-in fade-in slide-in-from-left-6 duration-1000">
             <img src={aboutImg} alt="EconLab institucional" width={1600} height={1100} loading="lazy" className="w-full aspect-[4/5] object-cover" />
-            <div className="absolute -bottom-8 -right-8 bg-gold p-8 max-w-xs hidden md:block">
-              <div className="font-display text-3xl font-bold text-navy">Desde 2018</div>
-              <p className="text-sm text-navy/80 mt-2">Ao serviço da inteligência económica em Moçambique.</p>
+            {/* Founder portrait inset */}
+            <figure className="absolute -bottom-10 -right-6 md:-right-10 w-40 md:w-56 shadow-2xl ring-4 ring-background overflow-hidden rounded-sm group">
+              <img
+                src={founders[1].img}
+                alt={founders[1].name}
+                width={600}
+                height={750}
+                loading="lazy"
+                className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-navy/90 backdrop-blur-sm px-3 py-2">
+                <div className="text-[9px] uppercase tracking-[0.18em] text-gold font-bold">{founders[1].area}</div>
+                <div className="font-display text-white text-xs font-bold leading-tight mt-0.5">{founders[1].name}</div>
+              </figcaption>
+            </figure>
+            <div className="absolute -bottom-8 -left-4 md:-left-8 bg-gold p-6 md:p-8 max-w-[200px] hidden md:block">
+              <div className="font-display text-2xl md:text-3xl font-bold text-navy">Desde 2018</div>
+              <p className="text-xs md:text-sm text-navy/80 mt-2">Ao serviço da inteligência económica em Moçambique.</p>
             </div>
           </div>
           <div>
