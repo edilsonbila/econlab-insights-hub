@@ -27,11 +27,12 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl backdrop-saturate-150 ${
         scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-[0_1px_0_0_rgba(0,15,74,0.04)]"
-          : "bg-background/80 backdrop-blur-sm"
+          ? "bg-white/30 border-b border-white/20 shadow-[0_4px_30px_rgba(0,15,74,0.06)]"
+          : "bg-white/10 border-b border-white/10"
       }`}
+      style={{ WebkitBackdropFilter: "blur(20px) saturate(150%)" }}
     >
       <div className="container-econ flex items-center justify-between h-20">
         <Link to="/" className="flex items-center gap-3 group">
