@@ -4,7 +4,16 @@ import { SiteShell } from "@/components/site/SiteShell";
 import heroImg from "@/assets/hero-econlab.jpg";
 import aboutImg from "@/assets/about-econlab.jpg";
 import logo from "@/assets/logo-econlab.jpg";
+import founder1 from "@/assets/founder-1.jpg";
+import founder2 from "@/assets/founder-2.jpg";
+import founder3 from "@/assets/founder-3.jpg";
 import { events, partners } from "@/lib/site-data";
+
+const founders = [
+  { img: founder1, name: "Dr. Hélder Mutombene", role: "Fundador & Presidente Executivo", area: "Estratégia Institucional" },
+  { img: founder2, name: "Dr. Aly Capingana", role: "Co-Fundador & Director de Pesquisa", area: "Economia Aplicada" },
+  { img: founder3, name: "Dr. Nelson Tivane", role: "Co-Fundador & Director de Consultoria", area: "Política Pública" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,31 +38,57 @@ function HomePage() {
         </div>
         <img src={logo} alt="" aria-hidden className="absolute right-[-80px] bottom-[-80px] w-[480px] opacity-[0.04] pointer-events-none select-none" />
         <div className="container-econ relative py-28 md:py-40">
-          <div className="max-w-3xl">
-            <span className="eyebrow !text-gold"><span className="text-gold">Research · Consulting · Training</span></span>
-            <h1 className="!text-white mt-6 text-5xl md:text-7xl font-display font-bold leading-[1.02]">
-              Transformando dados em <span className="text-gold">conhecimento estratégico</span>.
-            </h1>
-            <p className="mt-7 text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed">
-              Pesquisa, consultoria e formação para decisões económicas mais inteligentes em Moçambique e na região austral de África.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link to="/servicos" className="btn-gold">Conhecer Serviços <ArrowRight size={16} /></Link>
-              <Link to="/pesquisas" className="btn-outline !border-white/30 !text-white hover:!bg-white hover:!text-navy">Ver Publicações</Link>
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 max-w-3xl">
+              <span className="eyebrow !text-gold"><span className="text-gold">Research · Consulting · Training</span></span>
+              <h1 className="!text-white mt-6 text-5xl md:text-7xl font-display font-bold leading-[1.02]">
+                Transformando dados em <span className="text-gold">conhecimento estratégico</span>.
+              </h1>
+              <p className="mt-7 text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed">
+                Pesquisa, consultoria e formação para decisões económicas mais inteligentes em Moçambique e na região austral de África.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link to="/servicos" className="btn-gold">Conhecer Serviços <ArrowRight size={16} /></Link>
+                <Link to="/pesquisas" className="btn-outline !border-white/30 !text-white hover:!bg-white hover:!text-navy">Ver Publicações</Link>
+              </div>
             </div>
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl">
-              {[
-                { v: "120+", l: "Estudos publicados" },
-                { v: "45", l: "Clientes institucionais" },
-                { v: "1.800", l: "Quadros formados" },
-                { v: "12", l: "Países de actuação" },
-              ].map((s) => (
-                <div key={s.l} className="border-l-2 border-gold pl-4">
-                  <div className="font-display text-3xl md:text-4xl font-bold text-white">{s.v}</div>
-                  <div className="text-xs uppercase tracking-wider text-white/55 mt-1">{s.l}</div>
+
+            {/* Founder portrait card */}
+            <div className="lg:col-span-5 flex justify-center lg:justify-end animate-in fade-in slide-in-from-bottom-6 duration-1000">
+              <figure className="group relative w-full max-w-sm">
+                <div className="absolute -inset-2 bg-gold/20 blur-2xl opacity-60 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute -top-3 -left-3 w-24 h-24 border-t-2 border-l-2 border-gold" />
+                <div className="absolute -bottom-3 -right-3 w-24 h-24 border-b-2 border-r-2 border-gold" />
+                <div className="relative overflow-hidden rounded-sm shadow-2xl ring-1 ring-white/10">
+                  <img
+                    src={founders[0].img}
+                    alt={founders[0].name}
+                    width={900}
+                    height={1200}
+                    className="w-full aspect-[3/4] object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/95 via-navy/60 to-transparent p-6">
+                    <div className="text-[10px] uppercase tracking-[0.22em] text-gold font-bold">{founders[0].area}</div>
+                    <div className="font-display text-white text-lg font-bold mt-1">{founders[0].name}</div>
+                    <div className="text-xs text-white/70">{founders[0].role}</div>
+                  </div>
                 </div>
-              ))}
+              </figure>
             </div>
+          </div>
+
+          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl">
+            {[
+              { v: "120+", l: "Estudos publicados" },
+              { v: "45", l: "Clientes institucionais" },
+              { v: "1.800", l: "Quadros formados" },
+              { v: "12", l: "Países de actuação" },
+            ].map((s) => (
+              <div key={s.l} className="border-l-2 border-gold pl-4">
+                <div className="font-display text-3xl md:text-4xl font-bold text-white">{s.v}</div>
+                <div className="text-xs uppercase tracking-wider text-white/55 mt-1">{s.l}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -61,11 +96,26 @@ function HomePage() {
       {/* SOBRE */}
       <section className="py-24 md:py-32">
         <div className="container-econ grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative">
+          <div className="relative animate-in fade-in slide-in-from-left-6 duration-1000">
             <img src={aboutImg} alt="EconLab institucional" width={1600} height={1100} loading="lazy" className="w-full aspect-[4/5] object-cover" />
-            <div className="absolute -bottom-8 -right-8 bg-gold p-8 max-w-xs hidden md:block">
-              <div className="font-display text-3xl font-bold text-navy">Desde 2018</div>
-              <p className="text-sm text-navy/80 mt-2">Ao serviço da inteligência económica em Moçambique.</p>
+            {/* Founder portrait inset */}
+            <figure className="absolute -bottom-10 -right-6 md:-right-10 w-40 md:w-56 shadow-2xl ring-4 ring-background overflow-hidden rounded-sm group">
+              <img
+                src={founders[1].img}
+                alt={founders[1].name}
+                width={600}
+                height={750}
+                loading="lazy"
+                className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-navy/90 backdrop-blur-sm px-3 py-2">
+                <div className="text-[9px] uppercase tracking-[0.18em] text-gold font-bold">{founders[1].area}</div>
+                <div className="font-display text-white text-xs font-bold leading-tight mt-0.5">{founders[1].name}</div>
+              </figcaption>
+            </figure>
+            <div className="absolute -bottom-8 -left-4 md:-left-8 bg-gold p-6 md:p-8 max-w-[200px] hidden md:block">
+              <div className="font-display text-2xl md:text-3xl font-bold text-navy">Desde 2018</div>
+              <p className="text-xs md:text-sm text-navy/80 mt-2">Ao serviço da inteligência económica em Moçambique.</p>
             </div>
           </div>
           <div>
@@ -177,6 +227,47 @@ function HomePage() {
                   <h3 className="text-xl group-hover:text-navy">{e.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">{e.location}</p>
                   <p className="text-sm text-foreground/70 mt-2 leading-relaxed">{e.summary}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FUNDADORES */}
+      <section className="py-24 md:py-32 bg-gradient-to-b from-background to-surface">
+        <div className="container-econ">
+          <div className="max-w-2xl">
+            <span className="eyebrow">Os Nossos Fundadores</span>
+            <h2 className="mt-5 text-3xl md:text-5xl leading-tight">A liderança por trás da EconLab.</h2>
+            <span className="gold-bar mt-6" />
+            <p className="mt-6 text-muted-foreground leading-relaxed">
+              Três economistas com formação internacional e visão partilhada: colocar o conhecimento ao serviço do desenvolvimento de Moçambique e de África.
+            </p>
+          </div>
+          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {founders.map((f, i) => (
+              <article
+                key={f.name}
+                className="group relative bg-background ring-1 ring-border hover:ring-gold transition-all duration-500 animate-in fade-in slide-in-from-bottom-6"
+                style={{ animationDelay: `${i * 120}ms`, animationFillMode: "both", animationDuration: "900ms" }}
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={f.img}
+                    alt={f.name}
+                    width={900}
+                    height={1100}
+                    loading="lazy"
+                    className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
+                </div>
+                <div className="p-7">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-gold font-bold">{f.area}</div>
+                  <h3 className="mt-2 text-xl">{f.name}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{f.role}</p>
                 </div>
               </article>
             ))}
