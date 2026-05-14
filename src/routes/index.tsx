@@ -234,6 +234,47 @@ function HomePage() {
         </div>
       </section>
 
+      {/* FUNDADORES */}
+      <section className="py-24 md:py-32 bg-gradient-to-b from-background to-surface">
+        <div className="container-econ">
+          <div className="max-w-2xl">
+            <span className="eyebrow">Os Nossos Fundadores</span>
+            <h2 className="mt-5 text-3xl md:text-5xl leading-tight">A liderança por trás da EconLab.</h2>
+            <span className="gold-bar mt-6" />
+            <p className="mt-6 text-muted-foreground leading-relaxed">
+              Três economistas com formação internacional e visão partilhada: colocar o conhecimento ao serviço do desenvolvimento de Moçambique e de África.
+            </p>
+          </div>
+          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {founders.map((f, i) => (
+              <article
+                key={f.name}
+                className="group relative bg-background ring-1 ring-border hover:ring-gold transition-all duration-500 animate-in fade-in slide-in-from-bottom-6"
+                style={{ animationDelay: `${i * 120}ms`, animationFillMode: "both", animationDuration: "900ms" }}
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={f.img}
+                    alt={f.name}
+                    width={900}
+                    height={1100}
+                    loading="lazy"
+                    className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
+                </div>
+                <div className="p-7">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-gold font-bold">{f.area}</div>
+                  <h3 className="mt-2 text-xl">{f.name}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{f.role}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PARCEIROS */}
       <section className="bg-surface py-20">
         <div className="container-econ">
