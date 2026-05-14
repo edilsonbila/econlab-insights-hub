@@ -4,7 +4,16 @@ import { SiteShell } from "@/components/site/SiteShell";
 import heroImg from "@/assets/hero-econlab.jpg";
 import aboutImg from "@/assets/about-econlab.jpg";
 import logo from "@/assets/logo-econlab.jpg";
+import founder1 from "@/assets/founder-1.jpg";
+import founder2 from "@/assets/founder-2.jpg";
+import founder3 from "@/assets/founder-3.jpg";
 import { events, partners } from "@/lib/site-data";
+
+const founders = [
+  { img: founder1, name: "Dr. Hélder Mutombene", role: "Fundador & Presidente Executivo", area: "Estratégia Institucional" },
+  { img: founder2, name: "Dr. Aly Capingana", role: "Co-Fundador & Director de Pesquisa", area: "Economia Aplicada" },
+  { img: founder3, name: "Dr. Nelson Tivane", role: "Co-Fundador & Director de Consultoria", area: "Política Pública" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
