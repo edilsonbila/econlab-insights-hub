@@ -71,7 +71,7 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-background">
+        <div className="lg:hidden border-t border-white/20 bg-white/30 backdrop-blur-xl backdrop-saturate-150">
           <nav className="container-econ py-4 flex flex-col gap-1">
             {links.map((l) => (
               <Link
