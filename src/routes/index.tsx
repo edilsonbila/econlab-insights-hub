@@ -38,31 +38,57 @@ function HomePage() {
         </div>
         <img src={logo} alt="" aria-hidden className="absolute right-[-80px] bottom-[-80px] w-[480px] opacity-[0.04] pointer-events-none select-none" />
         <div className="container-econ relative py-28 md:py-40">
-          <div className="max-w-3xl">
-            <span className="eyebrow !text-gold"><span className="text-gold">Research · Consulting · Training</span></span>
-            <h1 className="!text-white mt-6 text-5xl md:text-7xl font-display font-bold leading-[1.02]">
-              Transformando dados em <span className="text-gold">conhecimento estratégico</span>.
-            </h1>
-            <p className="mt-7 text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed">
-              Pesquisa, consultoria e formação para decisões económicas mais inteligentes em Moçambique e na região austral de África.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link to="/servicos" className="btn-gold">Conhecer Serviços <ArrowRight size={16} /></Link>
-              <Link to="/pesquisas" className="btn-outline !border-white/30 !text-white hover:!bg-white hover:!text-navy">Ver Publicações</Link>
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 max-w-3xl">
+              <span className="eyebrow !text-gold"><span className="text-gold">Research · Consulting · Training</span></span>
+              <h1 className="!text-white mt-6 text-5xl md:text-7xl font-display font-bold leading-[1.02]">
+                Transformando dados em <span className="text-gold">conhecimento estratégico</span>.
+              </h1>
+              <p className="mt-7 text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed">
+                Pesquisa, consultoria e formação para decisões económicas mais inteligentes em Moçambique e na região austral de África.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link to="/servicos" className="btn-gold">Conhecer Serviços <ArrowRight size={16} /></Link>
+                <Link to="/pesquisas" className="btn-outline !border-white/30 !text-white hover:!bg-white hover:!text-navy">Ver Publicações</Link>
+              </div>
             </div>
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl">
-              {[
-                { v: "120+", l: "Estudos publicados" },
-                { v: "45", l: "Clientes institucionais" },
-                { v: "1.800", l: "Quadros formados" },
-                { v: "12", l: "Países de actuação" },
-              ].map((s) => (
-                <div key={s.l} className="border-l-2 border-gold pl-4">
-                  <div className="font-display text-3xl md:text-4xl font-bold text-white">{s.v}</div>
-                  <div className="text-xs uppercase tracking-wider text-white/55 mt-1">{s.l}</div>
+
+            {/* Founder portrait card */}
+            <div className="lg:col-span-5 flex justify-center lg:justify-end animate-in fade-in slide-in-from-bottom-6 duration-1000">
+              <figure className="group relative w-full max-w-sm">
+                <div className="absolute -inset-2 bg-gold/20 blur-2xl opacity-60 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute -top-3 -left-3 w-24 h-24 border-t-2 border-l-2 border-gold" />
+                <div className="absolute -bottom-3 -right-3 w-24 h-24 border-b-2 border-r-2 border-gold" />
+                <div className="relative overflow-hidden rounded-sm shadow-2xl ring-1 ring-white/10">
+                  <img
+                    src={founders[0].img}
+                    alt={founders[0].name}
+                    width={900}
+                    height={1200}
+                    className="w-full aspect-[3/4] object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/95 via-navy/60 to-transparent p-6">
+                    <div className="text-[10px] uppercase tracking-[0.22em] text-gold font-bold">{founders[0].area}</div>
+                    <div className="font-display text-white text-lg font-bold mt-1">{founders[0].name}</div>
+                    <div className="text-xs text-white/70">{founders[0].role}</div>
+                  </div>
                 </div>
-              ))}
+              </figure>
             </div>
+          </div>
+
+          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl">
+            {[
+              { v: "120+", l: "Estudos publicados" },
+              { v: "45", l: "Clientes institucionais" },
+              { v: "1.800", l: "Quadros formados" },
+              { v: "12", l: "Países de actuação" },
+            ].map((s) => (
+              <div key={s.l} className="border-l-2 border-gold pl-4">
+                <div className="font-display text-3xl md:text-4xl font-bold text-white">{s.v}</div>
+                <div className="text-xs uppercase tracking-wider text-white/55 mt-1">{s.l}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
