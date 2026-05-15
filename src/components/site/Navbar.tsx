@@ -34,12 +34,12 @@ export function Navbar() {
       }`}
       style={{ WebkitBackdropFilter: "blur(20px) saturate(150%)" }}
     >
-      <div className="container-econ flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-3 group">
-          <img src={logo} alt="EconLab Research & Training" className="h-12 w-12 object-contain" />
-          <div className="hidden sm:flex flex-col leading-none">
-            <span className="font-display font-bold text-navy tracking-tight text-[15px]">EconLab</span>
-            <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Research &amp; Training</span>
+      <div className="container-econ flex items-center justify-between h-16 md:h-20">
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
+          <img src={logo} alt="EconLab Research & Training" className="h-9 w-9 md:h-12 md:w-12 object-contain shrink-0" />
+          <div className="flex flex-col leading-none min-w-0">
+            <span className="font-display font-bold text-navy tracking-tight text-[13px] sm:text-[15px] truncate">EconLab</span>
+            <span className="hidden xs:inline text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-muted-foreground truncate">Research &amp; Training</span>
           </div>
         </Link>
 
