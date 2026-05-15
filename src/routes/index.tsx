@@ -261,16 +261,28 @@ function HomePage() {
       </section>
 
       {/* PARCEIROS */}
-      <section className="bg-surface py-20">
+      <section className="bg-surface py-20 md:py-24">
         <div className="container-econ">
           <div className="text-center max-w-2xl mx-auto">
             <span className="eyebrow">Parceiros Institucionais</span>
             <h2 className="mt-5 text-2xl md:text-4xl">Confiança de instituições de referência.</h2>
           </div>
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
+          <div className="mt-12 md:mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-border">
             {partners.map((p) => (
-              <div key={p} className="bg-surface aspect-[3/1] grid place-items-center px-6">
-                <span className="font-display font-semibold text-navy/70 text-center text-sm md:text-base">{p}</span>
+              <div
+                key={p.name}
+                className="bg-surface aspect-[3/2] sm:aspect-[3/1.4] flex flex-col items-center justify-center gap-2 px-4 py-5 hover:bg-background transition-colors"
+                title={p.name}
+              >
+                <img
+                  src={p.logo}
+                  alt={p.name}
+                  loading="lazy"
+                  className="h-10 sm:h-12 md:h-14 w-auto max-w-[80%] object-contain grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition"
+                />
+                <span className="font-display font-medium text-navy/70 text-center text-[10px] sm:text-[11px] md:text-xs leading-tight line-clamp-2">
+                  {p.name}
+                </span>
               </div>
             ))}
           </div>
@@ -278,16 +290,16 @@ function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24">
+      <section className="py-20 md:py-24">
         <div className="container-econ">
-          <div className="bg-navy text-white p-12 md:p-20 grid md:grid-cols-3 gap-10 items-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-2 h-full bg-gold" />
+          <div className="bg-navy text-white p-8 sm:p-12 md:p-20 grid md:grid-cols-3 gap-8 md:gap-10 items-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-1.5 md:w-2 h-full bg-gold" />
             <div className="md:col-span-2">
               <span className="eyebrow !text-gold"><span className="text-gold">Inteligência Económica</span></span>
-              <h2 className="!text-white mt-5 text-3xl md:text-5xl leading-tight">Transforme dados em decisões estratégicas.</h2>
+              <h2 className="!text-white mt-5 text-2xl sm:text-3xl md:text-5xl leading-tight">Transforme dados em decisões estratégicas.</h2>
             </div>
             <div className="flex md:justify-end">
-              <Link to="/contactos" className="btn-gold">Iniciar Conversa <ArrowRight size={16} /></Link>
+              <Link to="/contactos" className="btn-gold w-full sm:w-auto justify-center">Iniciar Conversa <ArrowRight size={16} /></Link>
             </div>
           </div>
         </div>
