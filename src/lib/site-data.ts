@@ -236,13 +236,22 @@ export const publications = [
   },
 ];
 
+import bancoMocambique from "@/assets/partners/banco-mocambique.png";
+import standardBank from "@/assets/partners/standard-bank.png";
+import bancoAfricano from "@/assets/partners/banco-africano.ico";
+import bancoMundial from "@/assets/partners/banco-mundial.ico";
+import bolsaValores from "@/assets/partners/bolsa-valores.ico";
+import fao from "@/assets/partners/fao.ico";
+import fmi from "@/assets/partners/fmi.ico";
+import uem from "@/assets/partners/uem.ico";
+
 export const partners = [
-  "Banco de Moçambique",
-  "Universidade Eduardo Mondlane",
-  "Banco Africano de Desenvolvimento",
-  "Banco Mundial",
-  "FMI",
-  "FAO",
-  "Standard Bank",
-  "Bolsa de Valores de Moçambique",
+  { name: "Banco de Moçambique", logo: bancoMocambique },
+  { name: "Universidade Eduardo Mondlane", logo: uem },
+  { name: "Banco Africano de Desenvolvimento", logo: bancoAfricano },
+  { name: "Banco Mundial", logo: bancoMundial },
+  { name: "FMI", logo: fmi },
+  { name: "FAO", logo: fao },
+  { name: "Standard Bank", logo: standardBank },
+  { name: "Bolsa de Valores de Moçambique", logo: bolsaValores },
 ];
