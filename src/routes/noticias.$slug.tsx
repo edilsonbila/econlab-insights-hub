@@ -103,7 +103,7 @@ function NoticiaDetail() {
             />
             <p className="text-lg md:text-xl text-foreground/85 leading-relaxed font-medium">{article.summary}</p>
             <div className="mt-8 space-y-6 text-foreground/80 leading-relaxed">
-              {article.content.map((p, i) => (
+              {article.content.map((p: string, i: number) => (
                 <p key={i}>{p}</p>
               ))}
             </div>

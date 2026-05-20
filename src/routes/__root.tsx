@@ -85,6 +85,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700&display=swap" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "EconLab Research & Training",
+          description: "Instituto independente de pesquisa económica, consultoria estratégica e formação executiva em Moçambique e África.",
+          areaServed: "MZ",
+          sameAs: [],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
