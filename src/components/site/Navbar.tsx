@@ -8,6 +8,7 @@ const links = [
   { to: "/sobre", label: "Sobre" },
   { to: "/servicos", label: "Serviços" },
   { to: "/pesquisas", label: "Pesquisas" },
+  { to: "/noticias", label: "Notícias" },
   { to: "/eventos", label: "Eventos" },
   { to: "/estrutura-organizacional", label: "Estrutura" },
   { to: "/equipa", label: "Equipa" },

@@ -10,18 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as PesquisasRouteImport } from './routes/pesquisas'
+import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as EstruturaOrganizacionalRouteImport } from './routes/estrutura-organizacional'
 import { Route as EquipaRouteImport } from './routes/equipa'
 import { Route as ContactosRouteImport } from './routes/contactos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 import { Route as DepartamentoSlugRouteImport } from './routes/departamento.$slug'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosRoute = ServicosRouteImport.update({
@@ -32,6 +40,11 @@ const ServicosRoute = ServicosRouteImport.update({
 const PesquisasRoute = PesquisasRouteImport.update({
   id: '/pesquisas',
   path: '/pesquisas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NoticiasRoute = NoticiasRouteImport.update({
+  id: '/noticias',
+  path: '/noticias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventosRoute = EventosRouteImport.update({
@@ -59,6 +72,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NoticiasRoute,
+} as any)
 const DepartamentoSlugRoute = DepartamentoSlugRouteImport.update({
   id: '/departamento/$slug',
   path: '/departamento/$slug',
@@ -71,10 +89,13 @@ export interface FileRoutesByFullPath {
   '/equipa': typeof EquipaRoute
   '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
   '/eventos': typeof EventosRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/pesquisas': typeof PesquisasRoute
   '/servicos': typeof ServicosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/departamento/$slug': typeof DepartamentoSlugRoute
+  '/noticias/$slug': typeof NoticiasSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -82,10 +103,13 @@ export interface FileRoutesByTo {
   '/equipa': typeof EquipaRoute
   '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
   '/eventos': typeof EventosRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/pesquisas': typeof PesquisasRoute
   '/servicos': typeof ServicosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/departamento/$slug': typeof DepartamentoSlugRoute
+  '/noticias/$slug': typeof NoticiasSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -94,10 +118,13 @@ export interface FileRoutesById {
   '/equipa': typeof EquipaRoute
   '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
   '/eventos': typeof EventosRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/pesquisas': typeof PesquisasRoute
   '/servicos': typeof ServicosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/departamento/$slug': typeof DepartamentoSlugRoute
+  '/noticias/$slug': typeof NoticiasSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,10 +134,13 @@ export interface FileRouteTypes {
     | '/equipa'
     | '/estrutura-organizacional'
     | '/eventos'
+    | '/noticias'
     | '/pesquisas'
     | '/servicos'
+    | '/sitemap.xml'
     | '/sobre'
     | '/departamento/$slug'
+    | '/noticias/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -118,10 +148,13 @@ export interface FileRouteTypes {
     | '/equipa'
     | '/estrutura-organizacional'
     | '/eventos'
+    | '/noticias'
     | '/pesquisas'
     | '/servicos'
+    | '/sitemap.xml'
     | '/sobre'
     | '/departamento/$slug'
+    | '/noticias/$slug'
   id:
     | '__root__'
     | '/'
@@ -129,10 +162,13 @@ export interface FileRouteTypes {
     | '/equipa'
     | '/estrutura-organizacional'
     | '/eventos'
+    | '/noticias'
     | '/pesquisas'
     | '/servicos'
+    | '/sitemap.xml'
     | '/sobre'
     | '/departamento/$slug'
+    | '/noticias/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -141,8 +177,10 @@ export interface RootRouteChildren {
   EquipaRoute: typeof EquipaRoute
   EstruturaOrganizacionalRoute: typeof EstruturaOrganizacionalRoute
   EventosRoute: typeof EventosRoute
+  NoticiasRoute: typeof NoticiasRouteWithChildren
   PesquisasRoute: typeof PesquisasRoute
   ServicosRoute: typeof ServicosRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   DepartamentoSlugRoute: typeof DepartamentoSlugRoute
 }
@@ -154,6 +192,13 @@ declare module '@tanstack/react-router' {
       path: '/sobre'
       fullPath: '/sobre'
       preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicos': {
@@ -168,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/pesquisas'
       fullPath: '/pesquisas'
       preLoaderRoute: typeof PesquisasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/noticias': {
+      id: '/noticias'
+      path: '/noticias'
+      fullPath: '/noticias'
+      preLoaderRoute: typeof NoticiasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/eventos': {
@@ -205,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/noticias/$slug': {
+      id: '/noticias/$slug'
+      path: '/$slug'
+      fullPath: '/noticias/$slug'
+      preLoaderRoute: typeof NoticiasSlugRouteImport
+      parentRoute: typeof NoticiasRoute
+    }
     '/departamento/$slug': {
       id: '/departamento/$slug'
       path: '/departamento/$slug'
@@ -215,14 +274,28 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface NoticiasRouteChildren {
+  NoticiasSlugRoute: typeof NoticiasSlugRoute
+}
+
+const NoticiasRouteChildren: NoticiasRouteChildren = {
+  NoticiasSlugRoute: NoticiasSlugRoute,
+}
+
+const NoticiasRouteWithChildren = NoticiasRoute._addFileChildren(
+  NoticiasRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactosRoute: ContactosRoute,
   EquipaRoute: EquipaRoute,
   EstruturaOrganizacionalRoute: EstruturaOrganizacionalRoute,
   EventosRoute: EventosRoute,
+  NoticiasRoute: NoticiasRouteWithChildren,
   PesquisasRoute: PesquisasRoute,
   ServicosRoute: ServicosRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   DepartamentoSlugRoute: DepartamentoSlugRoute,
 }
