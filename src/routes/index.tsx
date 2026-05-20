@@ -8,6 +8,7 @@ import founder1 from "@/assets/founder-1.jpg";
 import founder2 from "@/assets/founder-2.jpg";
 import founder3 from "@/assets/founder-3.jpg";
 import { events, partners } from "@/lib/site-data";
+import { getLatestNews } from "@/lib/news-data";
 
 const founders = [
   { img: founder1, name: "Dr. Hélder Mutombene", role: "Fundador & Presidente Executivo", area: "Estratégia Institucional" },
@@ -212,6 +213,56 @@ function HomePage() {
                   <h3 className="text-xl group-hover:text-navy">{e.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">{e.location}</p>
                   <p className="text-sm text-foreground/70 mt-2 leading-relaxed">{e.summary}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ÚLTIMAS NOTÍCIAS */}
+      <section className="bg-surface py-24 md:py-32">
+        <div className="container-econ">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-2xl">
+              <span className="eyebrow">Sala de Imprensa</span>
+              <h2 className="mt-5 text-3xl md:text-5xl leading-tight">Últimas Notícias.</h2>
+            </div>
+            <Link to="/noticias" className="text-navy font-semibold text-sm uppercase tracking-wider border-b-2 border-gold pb-1">
+              Todas as Notícias
+            </Link>
+          </div>
+          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {getLatestNews(3).map((n) => (
+              <article key={n.slug} className="group bg-background ring-1 ring-border hover:ring-gold transition-all flex flex-col">
+                <Link to="/noticias/$slug" params={{ slug: n.slug }} className="block overflow-hidden">
+                  <img
+                    src={n.image}
+                    alt={n.title}
+                    loading="lazy"
+                    width={800}
+                    height={500}
+                    className="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                  />
+                </Link>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] font-bold">
+                    <span className="text-gold">{n.category}</span>
+                    <span className="text-muted-foreground">{n.date}</span>
+                  </div>
+                  <h3 className="mt-3 text-lg leading-snug">
+                    <Link to="/noticias/$slug" params={{ slug: n.slug }} className="hover:text-navy">
+                      {n.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed flex-1">{n.summary}</p>
+                  <Link
+                    to="/noticias/$slug"
+                    params={{ slug: n.slug }}
+                    className="mt-5 inline-flex items-center gap-2 text-navy font-semibold text-xs uppercase tracking-wider border-b-2 border-gold pb-1 self-start hover:text-gold"
+                  >
+                    Ler mais <ArrowRight size={14} />
+                  </Link>
                 </div>
               </article>
             ))}

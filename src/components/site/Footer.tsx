@@ -35,6 +35,7 @@ export function Footer() {
             <li><Link to="/estrutura-organizacional" className="hover:text-gold">Estrutura Organizacional</Link></li>
             <li><Link to="/equipa" className="hover:text-gold">A Nossa Equipa</Link></li>
             <li><Link to="/pesquisas" className="hover:text-gold">Publicações &amp; Pesquisas</Link></li>
+            <li><Link to="/noticias" className="hover:text-gold">Notícias</Link></li>
             <li><Link to="/eventos" className="hover:text-gold">Eventos</Link></li>
           </ul>
         </div>
