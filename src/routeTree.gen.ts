@@ -18,6 +18,7 @@ import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as EstruturaOrganizacionalRouteImport } from './routes/estrutura-organizacional'
 import { Route as EquipaRouteImport } from './routes/equipa'
 import { Route as ContactosRouteImport } from './routes/contactos'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 import { Route as DepartamentoSlugRouteImport } from './routes/departamento.$slug'
@@ -67,6 +68,11 @@ const ContactosRoute = ContactosRouteImport.update({
   path: '/contactos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -85,6 +91,7 @@ const DepartamentoSlugRoute = DepartamentoSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contactos': typeof ContactosRoute
   '/equipa': typeof EquipaRoute
   '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contactos': typeof ContactosRoute
   '/equipa': typeof EquipaRoute
   '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contactos': typeof ContactosRoute
   '/equipa': typeof EquipaRoute
   '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/contactos'
     | '/equipa'
     | '/estrutura-organizacional'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/contactos'
     | '/equipa'
     | '/estrutura-organizacional'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/contactos'
     | '/equipa'
     | '/estrutura-organizacional'
@@ -173,6 +185,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   ContactosRoute: typeof ContactosRoute
   EquipaRoute: typeof EquipaRoute
   EstruturaOrganizacionalRoute: typeof EstruturaOrganizacionalRoute
@@ -250,6 +263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -288,6 +308,7 @@ const NoticiasRouteWithChildren = NoticiasRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   ContactosRoute: ContactosRoute,
   EquipaRoute: EquipaRoute,
   EstruturaOrganizacionalRoute: EstruturaOrganizacionalRoute,
