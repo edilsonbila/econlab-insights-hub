@@ -1,18 +1,20 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Calendar, ArrowLeft, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Calendar, ArrowLeft, User, Download } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
-import { getNewsBySlug, news } from "@/lib/news-data";
+import { getNewsBySlug, news, type NewsArticle } from "@/lib/news-data";
+import { getNewsBySlugStore, getAllNews } from "@/lib/news-store";
 
 export const Route = createFileRoute("/noticias/$slug")({
   loader: ({ params }) => {
-    const article = getNewsBySlug(params.slug);
-    if (!article) throw notFound();
-    return { article };
+    // SSR-safe: only static news here. Admin-created news resolve client-side.
+    const article = getNewsBySlug(params.slug) ?? null;
+    return { article, slug: params.slug };
   },
   head: ({ loaderData, params }) => {
     const a = loaderData?.article;
     if (!a) {
-      return { meta: [{ title: "Notícia não encontrada — EconLab" }] };
+      return { meta: [{ title: "Notícia — EconLab" }] };
     }
     return {
       meta: [
@@ -31,7 +33,6 @@ export const Route = createFileRoute("/noticias/$slug")({
         { name: "twitter:description", content: a.summary },
         { name: "twitter:image", content: a.image },
       ],
-      links: [{ rel: "canonical", href: `/noticias/${params.slug}` }],
       scripts: [
         {
           type: "application/ld+json",
@@ -54,26 +55,50 @@ export const Route = createFileRoute("/noticias/$slug")({
     };
   },
   component: NoticiaDetail,
-  notFoundComponent: () => (
-    <SiteShell>
-      <div className="container-econ py-32 text-center">
-        <h1 className="text-3xl">Notícia não encontrada</h1>
-        <Link to="/noticias" className="mt-6 inline-block btn-gold">Voltar às Notícias</Link>
-      </div>
-    </SiteShell>
-  ),
 });
 
 function NoticiaDetail() {
-  const { article } = Route.useLoaderData();
-  const related = news.filter((n) => n.slug !== article.slug && n.category === article.category).slice(0, 3);
+  const { article: ssrArticle, slug } = Route.useLoaderData();
+  const [article, setArticle] = useState<NewsArticle | null>(ssrArticle);
+  const [resolved, setResolved] = useState<boolean>(!!ssrArticle);
+  const [related, setRelated] = useState<NewsArticle[]>(
+    ssrArticle ? news.filter((n) => n.slug !== ssrArticle.slug && n.category === ssrArticle.category).slice(0, 3) : []
+  );
+
+  useEffect(() => {
+    const found = getNewsBySlugStore(slug);
+    if (found) {
+      setArticle(found);
+      setRelated(getAllNews().filter((n) => n.slug !== found.slug && n.category === found.category).slice(0, 3));
+    }
+    setResolved(true);
+  }, [slug]);
+
+  if (resolved && !article) {
+    return (
+      <SiteShell>
+        <div className="container-econ py-32 text-center">
+          <h1 className="text-3xl">Notícia não encontrada</h1>
+          <Link to="/noticias" className="mt-6 inline-block btn-gold">Voltar às Notícias</Link>
+        </div>
+      </SiteShell>
+    );
+  }
+
+  if (!article) {
+    return (
+      <SiteShell>
+        <div className="container-econ py-32 text-center text-muted-foreground">A carregar…</div>
+      </SiteShell>
+    );
+  }
 
   return (
     <SiteShell>
       <article>
         <header className="bg-navy text-navy-foreground relative overflow-hidden">
           <div className="absolute inset-0">
-            <img src={article.image} alt="" className="w-full h-full object-cover opacity-20" />
+            <img src={article.image} alt="" className="w-full h-full object-cover object-[center_top] opacity-20" />
             <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/95 to-navy/60" />
           </div>
           <div className="container-econ relative py-20 md:py-28">
@@ -99,7 +124,7 @@ function NoticiaDetail() {
               alt={article.title}
               width={1600}
               height={1000}
-              className="w-full aspect-[16/10] object-cover mb-10"
+              className="w-full aspect-[16/10] object-cover object-[center_top] mb-10"
             />
             <p className="text-lg md:text-xl text-foreground/85 leading-relaxed font-medium">{article.summary}</p>
             <div className="mt-8 space-y-6 text-foreground/80 leading-relaxed">
@@ -107,6 +132,18 @@ function NoticiaDetail() {
                 <p key={i}>{p}</p>
               ))}
             </div>
+
+            {article.pdfUrl && (
+              <div className="mt-12 border-t border-border pt-8">
+                <a
+                  href={article.pdfUrl}
+                  download={article.pdfName || `${article.slug}.pdf`}
+                  className="btn-gold inline-flex items-center gap-2"
+                >
+                  <Download size={16} /> Baixar PDF
+                </a>
+              </div>
+            )}
           </div>
         </section>
 
@@ -123,7 +160,7 @@ function NoticiaDetail() {
                     params={{ slug: n.slug }}
                     className="group bg-background ring-1 ring-border hover:ring-gold transition-all block"
                   >
-                    <img src={n.image} alt={n.title} loading="lazy" className="w-full aspect-[16/10] object-cover" />
+                    <img src={n.image} alt={n.title} loading="lazy" className="w-full aspect-[16/10] object-cover object-[center_top]" />
                     <div className="p-5">
                       <div className="text-[10px] uppercase tracking-[0.22em] text-gold font-bold">{n.category}</div>
                       <h3 className="mt-2 text-base leading-snug group-hover:text-navy">{n.title}</h3>

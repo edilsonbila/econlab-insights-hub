@@ -16,6 +16,8 @@ export type NewsArticle = {
   author: string;
   image: string;
   content: string[];
+  pdfUrl?: string;
+  pdfName?: string;
 };
 
 export const newsCategories: NewsCategory[] = ["Institucional", "Eventos", "Avisos"];
