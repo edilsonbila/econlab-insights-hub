@@ -242,7 +242,7 @@ function HomePage() {
                     loading="lazy"
                     width={800}
                     height={500}
-                    className="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                    className="w-full aspect-[16/10] object-cover object-[center_top] transition-transform duration-700 group-hover:scale-[1.05]"
                   />
                 </Link>
                 <div className="p-6 flex flex-col flex-1">

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Calendar, ArrowRight } from "lucide-react";
 import { SiteShell, PageHero } from "@/components/site/SiteShell";
-import { news, newsCategories, type NewsCategory } from "@/lib/news-data";
+import { news, newsCategories, type NewsArticle, type NewsCategory } from "@/lib/news-data";
+import { getAllNews } from "@/lib/news-store";
 
 export const Route = createFileRoute("/noticias")({
   head: () => ({
@@ -15,14 +16,19 @@ export const Route = createFileRoute("/noticias")({
       { property: "og:url", content: "/noticias" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/noticias" }],
   }),
   component: NoticiasPage,
 });
 
 function NoticiasPage() {
   const [filter, setFilter] = useState<"Todas" | NewsCategory>("Todas");
-  const filtered = filter === "Todas" ? news : news.filter((n) => n.category === filter);
+  const [allNews, setAllNews] = useState<NewsArticle[]>(news);
+
+  useEffect(() => {
+    setAllNews(getAllNews());
+  }, []);
+
+  const filtered = filter === "Todas" ? allNews : allNews.filter((n) => n.category === filter);
   const sorted = [...filtered].sort((a, b) => (a.isoDate < b.isoDate ? 1 : -1));
 
   return (
@@ -64,7 +70,7 @@ function NoticiasPage() {
                     loading="lazy"
                     width={800}
                     height={500}
-                    className="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                    className="w-full aspect-[16/10] object-cover object-[center_top] transition-transform duration-700 group-hover:scale-[1.05]"
                   />
                 </Link>
                 <div className="p-6 flex flex-col flex-1">
