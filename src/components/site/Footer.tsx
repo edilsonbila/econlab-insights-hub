@@ -32,11 +32,9 @@ export function Footer() {
           <h4 className="text-white text-xs uppercase tracking-[0.22em] mb-5 font-semibold">Instituição</h4>
           <ul className="space-y-3 text-sm text-white/70">
             <li><Link to="/sobre" className="hover:text-gold">Sobre a EconLab</Link></li>
-            <li><Link to="/estrutura-organizacional" className="hover:text-gold">Estrutura Organizacional</Link></li>
             <li><Link to="/equipa" className="hover:text-gold">A Nossa Equipa</Link></li>
             <li><Link to="/pesquisas" className="hover:text-gold">Publicações &amp; Pesquisas</Link></li>
             <li><Link to="/noticias" className="hover:text-gold">Notícias</Link></li>
-            <li><Link to="/eventos" className="hover:text-gold">Eventos</Link></li>
           </ul>
         </div>
 

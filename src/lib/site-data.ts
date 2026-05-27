@@ -1,3 +1,21 @@
+// ============================================
+// IMPORTAÇÕES DAS IMAGENS DA EQUIPA
+// ============================================
+import imagemAntonioMavie from "@/assets/IMG_2021.jpg";
+import imagemCarlaSumbane from "@/assets/IMG_6578.jpeg";
+
+// ============================================
+// IMPORTAÇÕES DOS LOGOTIPOS DOS PARCEIROS
+// ============================================
+import bancoMocambique from "@/assets/partners/banco-mocambique.png";
+import standardBank from "@/assets/partners/standard-bank.png";
+import bancoAfricano from "@/assets/partners/banco-africano.ico";
+import bancoMundial from "@/assets/partners/banco-mundial.ico";
+import fmi from "@/assets/partners/fmi.ico";
+import fao from "@/assets/partners/fao.ico";
+import uem from "@/assets/partners/uem.ico";
+import bolsaValores from "@/assets/partners/bolsa-valores.ico";
+
 export const services = [
   {
     slug: "pesquisa",
@@ -159,8 +177,18 @@ export const departments: Record<string, Department> = {
 };
 
 export const team = [
-  { name: "Dr. António Mavie", role: "Presidente do Conselho", area: "Direcção" },
-  { name: "Dr.ª Carla Sumbane", role: "Directora Executiva", area: "Direcção" },
+  { 
+    name: "Dr. Bruno Fernandes", 
+    role: "Coordenador de Comunicação e Imagem", 
+    area: "Comunicação Estrategica",
+    image: imagemAntonioMavie 
+  },
+  { 
+    name: "Dr.ª Enia Tembe", 
+    role: "Contabilista Externa", 
+    area: "Administração e Finanças",
+    image: imagemCarlaSumbane 
+  },
   { name: "Dr.ª Amélia Macuácua", role: "Directora de Pesquisa", area: "Pesquisa" },
   { name: "Eng.º Carlos Nhamposse", role: "Director de Consultoria", area: "Consultoria" },
   { name: "Prof. Dr. Edson Massingue", role: "Director de Formação", area: "Treinamento" },
@@ -235,15 +263,6 @@ export const publications = [
     date: "Julho 2024",
   },
 ];
-
-import bancoMocambique from "@/assets/partners/banco-mocambique.png";
-import standardBank from "@/assets/partners/standard-bank.png";
-import bancoAfricano from "@/assets/partners/banco-africano.ico";
-import bancoMundial from "@/assets/partners/banco-mundial.ico";
-import bolsaValores from "@/assets/partners/bolsa-valores.ico";
-import fao from "@/assets/partners/fao.ico";
-import fmi from "@/assets/partners/fmi.ico";
-import uem from "@/assets/partners/uem.ico";
 
 export const partners = [
   { name: "Banco de Moçambique", logo: bancoMocambique },

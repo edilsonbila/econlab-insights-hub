@@ -7,13 +7,14 @@ import logo from "@/assets/logo-econlab.jpg";
 import founder1 from "@/assets/founder-1.jpg";
 import founder2 from "@/assets/founder-2.jpg";
 import founder3 from "@/assets/founder-3.jpg";
-import { events, partners } from "@/lib/site-data";
+import { partners } from "@/lib/site-data";
 import { getLatestNews } from "@/lib/news-data";
+import { getAllNews } from "@/lib/news-store";
 
 const founders = [
-  { img: founder1, name: "Dr. Hélder Mutombene", role: "Fundador & Presidente Executivo", area: "Estratégia Institucional" },
-  { img: founder2, name: "Dr. Aly Capingana", role: "Co-Fundador & Director de Pesquisa", area: "Economia Aplicada" },
-  { img: founder3, name: "Dr. Nelson Tivane", role: "Co-Fundador & Director de Consultoria", area: "Política Pública" },
+  { img: founder1, name: "Dr. Egas Daniel", role: "Fundador & Presidente Executivo", area: "Estratégia Institucional" },
+  { img: founder2, name: "Dr. Egildo Z. Alsson", role: "Coordenador de Consultoria", area: "Estratagista em Consultoria" },
+  { img: founder3, name: "Dr. Félix Chirindza", role: "Director Executivo", area: "Planeiamento de Actividades" },
 ];
 
 export const Route = createFileRoute("/")({
@@ -29,6 +30,11 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const homeEvents = getAllNews()
+    .filter((n) => n.category === "Eventos")
+    .sort((a, b) => (a.isoDate < b.isoDate ? 1 : -1))
+    .slice(0, 3);
+
   return (
     <SiteShell>
       {/* HERO */}
@@ -94,7 +100,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SOBRE */}
+      {/* SOBRE A EMPRESA */}
       <section className="py-24 md:py-32">
         <div className="container-econ grid md:grid-cols-2 gap-16 items-center">
           <div className="relative animate-in fade-in slide-in-from-left-6 duration-1000">
@@ -106,13 +112,13 @@ function HomePage() {
           </div>
           <div>
             <span className="eyebrow">Sobre a EconLab</span>
-            <h2 className="mt-5 text-3xl md:text-5xl leading-tight">Um instituto independente de inteligência económica.</h2>
+            <h2 className="mt-5 text-3xl md:text-5xl leading-tight">Um laboratório de pensamento económico e financeiro aplicado.</h2>
             <span className="gold-bar mt-6" />
             <p className="mt-8 text-foreground/75 leading-relaxed text-lg">
-              A EconLab Research &amp; Training é uma instituição moçambicana dedicada à produção de conhecimento económico rigoroso, à consultoria estratégica de alto nível e à formação executiva de quadros para o sector público e privado.
+              A ECONLAB é um laboratório de pensamento económico e financeiro aplicado, orientado para o reforço da qualidade das decisões económicas e financeiras, a nível institucional e individual. A sua atuação assenta no rigor analítico, na fundamentação científica e na ligação consistente entre teoria e prática.
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              Reunimos economistas, analistas e formadores com experiência internacional, comprometidos com a excelência analítica, a integridade institucional e o desenvolvimento sustentável de África.
+              Possui experiência de colaboração com instituições públicas, privadas e organizações da sociedade civil, a nível nacional e internacional. Entre os parceiros institucionais com quem já trabalhou destacam-se universidades, associações profissionais e entidades de cooperação internacional.
             </p>
             <Link to="/sobre" className="mt-8 inline-flex items-center gap-2 text-navy font-semibold text-sm uppercase tracking-wider border-b-2 border-gold pb-1 hover:text-gold">
               Conhecer a Instituição <ArrowRight size={16} />
@@ -130,9 +136,9 @@ function HomePage() {
           </div>
           <div className="mt-16 grid md:grid-cols-3 gap-px bg-border">
             {[
-              { Icon: BarChart3, t: "Pesquisa Económica", d: "Estudos macroeconómicos, sectoriais e de avaliação de políticas, com rigor metodológico internacional." },
-              { Icon: Target, t: "Consultoria Estratégica", d: "Apoio à decisão para governos, instituições financeiras e empresas líderes em África." },
-              { Icon: GraduationCap, t: "Formação Executiva", d: "Programas certificados em economia aplicada, finanças, ciência de dados e gestão pública." },
+              { Icon: BarChart3, t: "Pesquisa", d: "Pesquisa e análise económica e financeira aplicada, orientada para a produção de informação estratégica e evidência empírica sobre o ambiente económico e financeiro do país." },
+              { Icon: Target, t: "Consultoria", d: "Consultoria económica, financeira e de gestão de projectos, orientada para apoiar a formulação, implementação, monitoria e avaliação de políticas, programas, projectos e estratégias." },
+              { Icon: GraduationCap, t: "Treinamento", d: "Desenvolvimento de competências técnicas, analíticas e de tomada de decisão em áreas chave da economia, finanças e gestão de projectos, com enfoque prático e aplicado, adaptado às necessidades institucionais e individuais dos participantes." },
             ].map(({ Icon, t, d }) => (
               <div key={t} className="bg-background p-10 group hover:bg-navy hover:text-white transition-all duration-500">
                 <Icon size={36} className="text-gold" strokeWidth={1.5} />
@@ -154,9 +160,21 @@ function HomePage() {
           </div>
           <div className="mt-14 grid md:grid-cols-3 gap-8">
             {[
-              { t: "Missão", d: "Produzir conhecimento económico de excelência e capacitar decisores para um desenvolvimento sustentável de Moçambique e de África.", n: "01" },
-              { t: "Visão", d: "Ser a referência incontornável em pesquisa, consultoria e formação económica na região austral de África até 2030.", n: "02" },
-              { t: "Valores", d: "Independência intelectual, rigor analítico, integridade institucional, excelência académica e compromisso com o continente.", n: "03" },
+              { 
+                t: "Missão", 
+                d: "Contribuir para a melhoria da qualidade das decisões económicas e financeiras, através de análise aplicada rigorosa, consultoria estratégica e desenvolvimento de competências, apoiando instituições e profissionais a responder de forma informada, eficaz e sustentável aos desafios económicos e financeiros.", 
+                n: "01" 
+              },
+              { 
+                t: "Visão", 
+                d: "Ser uma referência nacional e internacional em pensamento económico e financeiro aplicado, contribuindo para decisões económicas e financeiras públicas e privadas mais racionais, éticas e sustentáveis.", 
+                n: "02" 
+              },
+              { 
+                t: "Valores", 
+                d: "Rigor técnico • Evidência • Relevância prática • Integridade • Impacto • Aprendizagem contínua", 
+                n: "03" 
+              },
             ].map((c) => (
               <div key={c.t} className="border border-border p-10 hover:border-gold transition-colors">
                 <div className="font-display text-5xl font-bold text-gold">{c.n}</div>
@@ -177,14 +195,14 @@ function HomePage() {
           </div>
           <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
             {[
-              { Icon: Award, t: "Excelência Académica", d: "Equipa formada nas melhores universidades de Europa, África e América." },
-              { Icon: ShieldCheck, t: "Independência", d: "Investigação livre de pressões políticas ou comerciais." },
-              { Icon: Globe, t: "Visão Africana", d: "Profundo conhecimento dos contextos moçambicano e regional." },
-              { Icon: TrendingUp, t: "Impacto Mensurável", d: "Recomendações que se traduzem em resultados verificáveis." },
+              { Icon: Award, t: "Rigor Analítico e Fundamentação Científica", d: "A ECONLAB estrutura toda a sua actuação sobre evidência empírica e metodologias reconhecidas internacionalmente." },
+              { Icon: TrendingUp, t: "Relevância Institucional e Aplicabilidade Prática", d: "O valor do conhecimento económico e financeiro reside na sua capacidade de orientar decisões concretas." },
+              { Icon: ShieldCheck, t: "Ética, Governação e Responsabilidade Pública", d: "A ECONLAB integra princípios éticos, transparência e responsabilidade na pesquisa." },
+              { Icon: Globe, t: "Aprendizagem contínua e Inovação Metodológica", d: "A ECONLAB valoriza a atualização permanente de competências, inovação metodológica e partilha de conhecimento." },
             ].map(({ Icon, t, d }) => (
               <div key={t} className="bg-navy p-8">
                 <Icon size={28} className="text-gold" strokeWidth={1.5} />
-                <h3 className="!text-white mt-6 text-lg">{t}</h3>
+                <h3 className="!text-white mt-6 text-base md:text-lg leading-tight">{t}</h3>
                 <p className="mt-3 text-white/65 text-sm leading-relaxed">{d}</p>
               </div>
             ))}
@@ -200,18 +218,24 @@ function HomePage() {
               <span className="eyebrow">Agenda Institucional</span>
               <h2 className="mt-5 text-3xl md:text-5xl leading-tight">Eventos recentes.</h2>
             </div>
-            <Link to="/eventos" className="text-navy font-semibold text-sm uppercase tracking-wider border-b-2 border-gold pb-1">
-              Ver Agenda Completa
+            <Link to="/noticias" className="text-navy font-semibold text-sm uppercase tracking-wider border-b-2 border-gold pb-1">
+              Ver Todos os Eventos
             </Link>
           </div>
           <div className="mt-14 divide-y divide-border border-y border-border">
-            {events.map((e) => (
-              <article key={e.title} className="py-8 grid md:grid-cols-12 gap-6 items-baseline group hover:bg-surface/60 px-2 -mx-2 transition-colors">
+            {homeEvents.length === 0 && (
+              <p className="text-sm text-muted-foreground py-8">Nenhum evento agendado neste momento.</p>
+            )}
+            {homeEvents.map((e) => (
+              <article key={e.slug} className="py-8 grid md:grid-cols-12 gap-6 items-baseline group hover:bg-surface/60 px-2 -mx-2 transition-colors">
                 <div className="md:col-span-2 text-sm font-semibold text-navy">{e.date}</div>
-                <div className="md:col-span-2 text-xs uppercase tracking-wider text-gold font-bold">{e.type}</div>
+                <div className="md:col-span-2 text-xs uppercase tracking-wider text-gold font-bold">{e.category}</div>
                 <div className="md:col-span-8">
-                  <h3 className="text-xl group-hover:text-navy">{e.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{e.location}</p>
+                  <h3 className="text-xl group-hover:text-navy">
+                    <Link to="/noticias/$slug" params={{ slug: e.slug }} className="hover:text-navy">
+                      {e.title}
+                    </Link>
+                  </h3>
                   <p className="text-sm text-foreground/70 mt-2 leading-relaxed">{e.summary}</p>
                 </div>
               </article>

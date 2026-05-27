@@ -24,7 +24,7 @@ export const Route = createFileRoute("/departamento/$slug")({
     <SiteShell>
       <div className="container-econ py-32 text-center">
         <h1 className="text-4xl">Departamento não encontrado</h1>
-        <Link to="/estrutura-organizacional" className="btn-primary mt-8">Ver Departamentos</Link>
+        <Link to="/servicos" className="btn-primary mt-8">Ver Serviços</Link>
       </div>
     </SiteShell>
   ),

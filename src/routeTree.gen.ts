@@ -14,8 +14,6 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as PesquisasRouteImport } from './routes/pesquisas'
 import { Route as NoticiasRouteImport } from './routes/noticias'
-import { Route as EventosRouteImport } from './routes/eventos'
-import { Route as EstruturaOrganizacionalRouteImport } from './routes/estrutura-organizacional'
 import { Route as EquipaRouteImport } from './routes/equipa'
 import { Route as ContactosRouteImport } from './routes/contactos'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -46,16 +44,6 @@ const PesquisasRoute = PesquisasRouteImport.update({
 const NoticiasRoute = NoticiasRouteImport.update({
   id: '/noticias',
   path: '/noticias',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventosRoute = EventosRouteImport.update({
-  id: '/eventos',
-  path: '/eventos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EstruturaOrganizacionalRoute = EstruturaOrganizacionalRouteImport.update({
-  id: '/estrutura-organizacional',
-  path: '/estrutura-organizacional',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EquipaRoute = EquipaRouteImport.update({
@@ -94,8 +82,6 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/contactos': typeof ContactosRoute
   '/equipa': typeof EquipaRoute
-  '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
-  '/eventos': typeof EventosRoute
   '/noticias': typeof NoticiasRouteWithChildren
   '/pesquisas': typeof PesquisasRoute
   '/servicos': typeof ServicosRoute
@@ -109,8 +95,6 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/contactos': typeof ContactosRoute
   '/equipa': typeof EquipaRoute
-  '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
-  '/eventos': typeof EventosRoute
   '/noticias': typeof NoticiasRouteWithChildren
   '/pesquisas': typeof PesquisasRoute
   '/servicos': typeof ServicosRoute
@@ -125,8 +109,6 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/contactos': typeof ContactosRoute
   '/equipa': typeof EquipaRoute
-  '/estrutura-organizacional': typeof EstruturaOrganizacionalRoute
-  '/eventos': typeof EventosRoute
   '/noticias': typeof NoticiasRouteWithChildren
   '/pesquisas': typeof PesquisasRoute
   '/servicos': typeof ServicosRoute
@@ -142,8 +124,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contactos'
     | '/equipa'
-    | '/estrutura-organizacional'
-    | '/eventos'
     | '/noticias'
     | '/pesquisas'
     | '/servicos'
@@ -157,8 +137,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contactos'
     | '/equipa'
-    | '/estrutura-organizacional'
-    | '/eventos'
     | '/noticias'
     | '/pesquisas'
     | '/servicos'
@@ -172,8 +150,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contactos'
     | '/equipa'
-    | '/estrutura-organizacional'
-    | '/eventos'
     | '/noticias'
     | '/pesquisas'
     | '/servicos'
@@ -188,8 +164,6 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   ContactosRoute: typeof ContactosRoute
   EquipaRoute: typeof EquipaRoute
-  EstruturaOrganizacionalRoute: typeof EstruturaOrganizacionalRoute
-  EventosRoute: typeof EventosRoute
   NoticiasRoute: typeof NoticiasRouteWithChildren
   PesquisasRoute: typeof PesquisasRoute
   ServicosRoute: typeof ServicosRoute
@@ -233,20 +207,6 @@ declare module '@tanstack/react-router' {
       path: '/noticias'
       fullPath: '/noticias'
       preLoaderRoute: typeof NoticiasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/eventos': {
-      id: '/eventos'
-      path: '/eventos'
-      fullPath: '/eventos'
-      preLoaderRoute: typeof EventosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/estrutura-organizacional': {
-      id: '/estrutura-organizacional'
-      path: '/estrutura-organizacional'
-      fullPath: '/estrutura-organizacional'
-      preLoaderRoute: typeof EstruturaOrganizacionalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/equipa': {
@@ -311,8 +271,6 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   ContactosRoute: ContactosRoute,
   EquipaRoute: EquipaRoute,
-  EstruturaOrganizacionalRoute: EstruturaOrganizacionalRoute,
-  EventosRoute: EventosRoute,
   NoticiasRoute: NoticiasRouteWithChildren,
   PesquisasRoute: PesquisasRoute,
   ServicosRoute: ServicosRoute,
@@ -323,3 +281,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

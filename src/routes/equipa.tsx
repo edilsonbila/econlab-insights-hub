@@ -35,11 +35,19 @@ function EquipaPage() {
                       "linear-gradient(135deg, oklch(0.22 0.13 268) 0%, oklch(0.32 0.13 268) 100%)",
                   }}
                 >
-                  <div className="absolute inset-0 grid place-items-center">
-                    <span className="font-display text-7xl font-bold text-gold/30">
-                      {m.name.split(" ").slice(-1)[0]?.[0] ?? "E"}
-                    </span>
-                  </div>
+                  {m.image ? (
+                    <img
+                      src={m.image}
+                      alt={m.name}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 grid place-items-center">
+                      <span className="font-display text-7xl font-bold text-gold/30">
+                        {m.name.split(" ").slice(-1)[0]?.[0] ?? "E"}
+                      </span>
+                    </div>
+                  )}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold" />
                 </div>
                 <div className="text-xs uppercase tracking-wider text-gold font-bold">{m.area}</div>

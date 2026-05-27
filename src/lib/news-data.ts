@@ -103,6 +103,22 @@ export const news: NewsArticle[] = [
       "O encontro consolidou a EconLab como pólo regional de formação avançada em economia aplicada e abriu caminho para uma nova rede de colaboração entre investigadores africanos.",
     ],
   },
+  {
+    slug: "forum-investimento-industria-extractiva-2025",
+    title: "Fórum sobre Investimento e Indústria Extractiva analisa impacto do Gás Natural",
+    summary:
+      "Debate de alto nível sobre o impacto macroeconómico dos projectos de gás natural na bacia do Rovuma reuniu decisores e líderes empresariais no Hotel Polana.",
+    category: "Eventos",
+    date: "28 Maio 2025",
+    isoDate: "2025-05-28",
+    author: "Departamento de Comunicação",
+    image: heroImg,
+    content: [
+      "A EconLab Research & Training promoveu esta semana o Fórum sobre Investimento e Indústria Extractiva no Hotel Polana, em Maputo, reunindo líderes do sector corporativo, decisores públicos e analistas de referência.",
+      "O debate debruçou-se sobre os cenários e impactos macroeconómicos decorrentes dos grandes projectos de exploração de GNL na bacia do Rovuma, identificando estratégias chave de regulação, estabilidade fiscal e criação de valor local.",
+      "O painel debateu também a transição energética global e o papel do gás natural como vector de transição industrializador para Moçambique e região austral de África.",
+    ],
+  },
 ];
 
 export function getNewsBySlug(slug: string) {

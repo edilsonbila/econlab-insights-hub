@@ -4,6 +4,7 @@ import { Calendar, ArrowLeft, User, Download } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { getNewsBySlug, news, type NewsArticle } from "@/lib/news-data";
 import { getNewsBySlugStore, getAllNews } from "@/lib/news-store";
+import { incrementViews } from "@/lib/views-store";
 
 export const Route = createFileRoute("/noticias/$slug")({
   loader: ({ params }) => {
@@ -66,6 +67,7 @@ function NoticiaDetail() {
   );
 
   useEffect(() => {
+    incrementViews(slug);
     const found = getNewsBySlugStore(slug);
     if (found) {
       setArticle(found);
